@@ -1,128 +1,42 @@
 ﻿@model IEnumerable<Practical_06.Models.Product>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Product Catalog";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Product Catalog</title>
-</head>
+<h1>Product Catalog</h1>
+<p>Available Products</p>
 
-<body style="font-family:Arial; background-color:#f5f5f5; margin:0;">
+<table border="1" cellpadding="10" cellspacing="0" width="100%">
+    <tr>
+        <th>Product Image</th>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Action</th>
+    </tr>
 
-    <div style="width:98%; margin:30px auto;">
-
-        <!-- Heading -->
-        <h1 style="text-align:center; font-size:32px; color:#222;">
-            Product Catalog
-        </h1>
-
-        <p style="text-align:center; font-size:19px; color:#222; font-weight:bold;">
-            Available Products
-        </p>
-
-        <!-- Product Table -->
-        <table border="1"
-               cellpadding="15"
-               cellspacing="0"
-               width="100%"
-               style="border-collapse:collapse;
-                      background-color:white;
-                      font-size:17px;
-                      color:#222;">
-
-            <!-- Header -->
-            <tr style="background-color:#333;
-                       color:white;
-                       text-align:center;
-                       font-size:18px;">
-
-                <th style="width:15%;">Product Image</th>
-                <th style="width:8%;">Product ID</th>
-                <th style="width:15%;">Product Name</th>
-                <th style="width:22%;">Description</th>
-                <th style="width:10%;">Price</th>
-                <th style="width:12%;">Category</th>
-                <th style="width:8%;">Quantity</th>
-                <th style="width:10%;">Action</th>
-
-            </tr>
-
-            <!-- Products -->
-            @foreach (var product in Model)
-            {
-                <tr style="text-align:center;
-                           vertical-align:middle;
-                           color:#222;">
-
-                    <!-- Image -->
-                    <td>
-                        <img src="@product.Image"
-                             alt="@product.ProductName"
-                             width="160"
-                             height="130"
-                             style="object-fit:cover;
-                                    border-radius:8px;" />
-                    </td>
-
-                    <!-- Product ID -->
-                    <td>
-                        <b>@product.ProductId</b>
-                    </td>
-
-                    <!-- Product Name -->
-                    <td>
-                        <b style="font-size:19px;">
-                            @product.ProductName
-                        </b>
-                    </td>
-
-                    <!-- Description -->
-                    <td style="line-height:1.5; font-weight:bold;">
-                        @product.Description
-                    </td>
-
-                    <!-- Price -->
-                    <td>
-                        <b style="font-size:18px;">
-                            ₹ @product.Price
-                        </b>
-                    </td>
-
-                    <!-- Category -->
-                    <td>
-                        <b>@product.Category</b>
-                    </td>
-
-                    <!-- Quantity -->
-                    <td>
-                        <b>@product.Quantity</b>
-                    </td>
-
-                    <!-- Action -->
-                    <td>
-                        <a href="@Url.Action("Details", "ProductDefault", new { id = product.ProductId })"
-                           style="display:inline-block;
-                                  padding:10px 15px;
-                                  background-color:#333;
-                                  color:white;
-                                  text-decoration:none;
-                                  border-radius:5px;
-                                  font-weight:bold;">
-                            View Details
-                        </a>
-                    </td>
-
-                </tr>
-            }
-
-        </table>
-
-    </div>
-
-</body>
-</html>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>
+                <img src="@product.Image" alt="@product.ProductName" width="100" height="80" />
+            </td>
+            <td>@product.ProductId</td>
+            <td>@product.ProductName</td>
+            <td>@product.Description</td>
+            <td>₹ @product.Price</td>
+            <td>@product.Category</td>
+            <td>@product.Quantity</td>
+            <td>
+                <a href="@Url.Action("Details", "ProductDefault", new { id = product.ProductId })">
+                    View Details
+                </a>
+            </td>
+        </tr>
+    }
+</table>
